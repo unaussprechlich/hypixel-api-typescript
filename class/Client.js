@@ -1,7 +1,7 @@
 const path = require('path')
-const pp = require('phin').promisified
+const p = require('phin').promisified
 
-const Player = require(path.join(__dirname, 'Player.js'))
+const baseURL = 'https://api.hypixel.net/'
 
 /**
 * Main Client class. API keys are used to create client instances.
@@ -12,7 +12,7 @@ class Client {
 	}
 
 	/**
-	* Get a Player instance for a player.
+	* Get a player's data.
 	* @param {string} [targetType=uuid] - Target type. 'name' or 'uuid'
 	* @param {string} identifier - Identifier for the target. (Either a name or UUID, based on targetType.)
 	*/
@@ -20,8 +20,10 @@ class Client {
 		const targetType = (p2 ? p1 : 'uuid')
 		const identifier = (p2 ? p2 : p1)
 
+		let targetUUID = (targetType === 'uuid' ? identifier : null)
+
 		if (targetType === 'name') {
-			let playerResolution = await pp({
+			let playerResolution = await p({
 				'url': 'https://api.mojang.com/profiles/minecraft',
 				'method': 'POST',
 				'data': JSON.stringify([identifier])
@@ -39,19 +41,21 @@ class Client {
 				}
 
 				if (body.length > 0) {
-					return new Player(body[0].id, this.key)
+					targetUUID = body
 				}
 				else {
 					throw new Error('Player does not exist.')
 				}
 			}
 			else {
-				throw new Error('Unexpected status code from Mojang UUID resolution endpoint.')
+				throw new Error('Unexpected HTTP status code from Mojang UUID resolution endpoint.')
 			}
 		}
-		else {
-			return new Player(identifier, this.key)
-		}
+
+		return JSON.parse((await p({
+			'url': baseURL + 'player?uuid=' + targetUUID + '&key=' + this.key,
+			'method': 'GET'
+		})).body)
 	}
 }
 
