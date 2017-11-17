@@ -1,0 +1,30 @@
+{
+  "name": "hypixel-api",
+  "version": "1.0.0",
+  "description": "A light Hypixel Public API client for Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethanent/hypixel-api.git"
+  },
+  "keywords": [
+    "hypixel",
+    "hypixel-api",
+    "api-client",
+    "client",
+    "api",
+    "minecraft"
+  ],
+  "author": "Ethan Davis",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/ethanent/hypixel-api/issues"
+  },
+  "homepage": "https://github.com/ethanent/hypixel-api#readme",
+  "dependencies": {
+    "phin": "^2.4.18"
+  }
+}
