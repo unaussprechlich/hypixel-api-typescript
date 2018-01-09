@@ -1,57 +1,106 @@
 <p align="center" style="text-align: center;"><img src="https://api.hypixel.net/assets/images/logo.png" width="300" alt="Hypixel logo"/></p>
 
----
 
-> A light Hypixel Public API client for Node
+[GitHub](https://github.com/unaussprechlich/hypixel-api) | [NPM](https://www.npmjs.com/package/hypixel-api-typescript)
 
-[Full documentation](https://ethanent.github.io/hypixel-api/) | [GitHub](https://github.com/ethanent/hypixel-api) | [NPM](https://www.npmjs.com/package/hypixel-api)
+### This package is a wrapper for [https://api.hypixel.net](https://api.hypixel.net) written in Typescript. 
+
+>All requests are returned as parsed Typescript interfaces and so gone is the time, where you have to constantly check the names of the values you actually need. If there are any values the Interface does not contain, then open a issue or Pullrequest on [GitHub](“https://github.com/unaussprechlich/hyixel-api”). 
+Also a huge shoutout to [ethanent](“https://github.com/ethanent”) from where I forked this repository, so that I have a base to work with.
 
 ## Installation
 
 ```shell
-npm install --save hypixel-api
+npm install --save hypixel-api-typescript
 ```
 
 ## Usage
 
+> Import the HypixelAPI and store your Hypixel API-key as a UUID.
+
+```typescript
+import * as HypixelAPI from 'hypixel-api-typescript';
+
+const API_KEY = UUID.fromString("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx")
+```
+
 ### Getting player information
 
-Getting player information is simple.
 
-```javascript
-const HypixelAPI = require('hypixel-api')
+```typescript
+//by NAME
+const playerByName = await HypixelAPI.getPlayerByName("unaussprechlich", API_KEY);
 
-const client = new HypixelAPI('API-key')
-
-client.getPlayer('name', 'Ethanent').then((player) => {
-	console.log(player)
-}).catch((err) => {
-	console.error('Error! ' + err)
-})
+//by UUID
+const uuid = UUID.fromShortString("4064d7ecc2124a1cb252ecc0403a2824");
+const playerByName = await HypixelAPI.getPlayerByUuid(uuid, API_KEY);
 ```
 
 ### Finding guilds
 
-A guild ID can be found from the guild's name, or a member's UUID or name, like so:
+> A GuildID can be found from a member's UUID or name.
 
-```javascript
-client.findGuild('memberName', 'Ethanent').then((data) => {
-	console.log(data) // {"success":true,"guild":"52e572a684ae6e67043aa084"}
-}).catch((err) => {
-	console.error('Error! ' + err)
-})
+```typescript
+//by NAME
+const guildIdByMemberName = await HypixelAPI.findGuildIdByPlayerName("unaussprechlich", API_KEY);
+
+//by UUID
+const uuid = UUID.fromShortString("4064d7ecc2124a1cb252ecc0403a2824");
+const guildIdByMemberUuid = await HypixelAPI.findGuildIdByPlayerUuid(uuid, API_KEY);
 ```
 
-### Getting guild information
+> With the GuildID you can request the Guild.
 
-```javascript
-client.getGuild('52e572a684ae6e67043aa084').then((guildData) => {
-	console.log(guildData)
-}).catch((err) => {
-	console.error('Error!' + err)
-})
+```typescript
+const guild = await HypixelAPI.getGuildById(guildIdByMemberUuid, API_KEY);
 ```
 
-## Full documentation
+> HypixelAPI can also return the Guild directly.
 
-See the [full documentation](https://ethanent.github.io/hypixel-api/) for a complete overview of the functionality of hypixel-api!
+```typescript
+//by NAME
+const guildByMemberName = await HypixelAPI.getGuildByPlayerName("unaussprechlich", API_KEY);
+
+//by UUID
+const uuid = UUID.fromShortString("4064d7ecc2124a1cb252ecc0403a2824");
+const guildByMemberUuid = await HypixelAPI.getGuildByIPlayerUuid(uuid, API_KEY);
+```
+
+### Getting booster information
+
+> This does return all active an queued Boosters. 
+
+```typescript
+const boosters = await HypixelAPI.getBoosters(API_KEY);
+```
+
+You can also check if Hypixel has paused the Booster queue.
+
+```typescript
+const isQueueStopped = await HypixelAPI.getBoostersIsDecrementing(API_KEY);
+```
+
+### Getting the leaderboards
+
+> The HypixelAPI can request the leaderboards you find in each Gamelobby.
+
+```typescript
+const leaderboards = await HypixelAPI.getLeaderboards(API_KEY);
+```
+
+### Getting informations about your API-key
+
+> The HypixelAPI can request the leaderboards you find in each Gamelobby.
+
+```typescript
+const key = await HypixelAPI.getKey(API_KEY);
+```
+
+## API Response
+
+* [Player](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/PlayerResponse.ts)
+* [Guild](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/GuildResponse.ts)
+* [FindGuild](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/FindGuildResponse.ts)
+* [Boosters](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/BoostersResponse.ts)
+* [Key](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/KeyReponse.ts)
+* [Leaderboards](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/LeaderboardsResponse.ts)

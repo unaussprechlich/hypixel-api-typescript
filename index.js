@@ -1,3 +1,8 @@
-const path = require('path')
-
-module.exports = require(path.join(__dirname, 'class', 'Client.js'))
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(require("./src/HypixelAPI"));
+__export(require("./src/Exceptions"));
+__export(require("./src/UUID"));
