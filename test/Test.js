@@ -29,12 +29,6 @@ if (API_KEY_STRING == null)
 const API_KEY = UUID_1.default.fromString(API_KEY_STRING.toString());
 const RANDOM_UUID = UUID_1.default.fromString("851f96b9-51be-4eaf-9b2e-8d303111fe07");
 let TestHypixelAPI = class TestHypixelAPI {
-    testApiKey() {
-        throw (API_KEY_STRING);
-    }
-    testApiKey2() {
-        throw (API_KEY.toString());
-    }
     playerRequestByName() {
         return __awaiter(this, void 0, void 0, function* () {
             const playerByName = yield HypixelAPI.getPlayerByName(USERNAME, API_KEY);
@@ -87,12 +81,6 @@ let TestHypixelAPI = class TestHypixelAPI {
         });
     }
 };
-__decorate([
-    mocha_typescript_1.test("API_KEY", mocha_typescript_1.timeout(5000))
-], TestHypixelAPI.prototype, "testApiKey", null);
-__decorate([
-    mocha_typescript_1.test("API_KEY_2", mocha_typescript_1.timeout(5000))
-], TestHypixelAPI.prototype, "testApiKey2", null);
 __decorate([
     mocha_typescript_1.test("PlayerRequest by Name", mocha_typescript_1.timeout(5000))
 ], TestHypixelAPI.prototype, "playerRequestByName", null);
