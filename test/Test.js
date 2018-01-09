@@ -23,9 +23,18 @@ const UUID_STR = '4064d7ecc2124a1cb252ecc0403a2824';
 const UUID_CONST = UUID_1.default.fromShortString(UUID_STR);
 const GUILD_ID = "587eae890cf23f1ace3bed99";
 const GUILD_TAG = "SHADOW";
-const API_KEY = UUID_1.default.fromString('304ec9f6-718e-463f-a762-bd5c60111b0b');
+const API_KEY_STRING = process.env.API_KEY;
+if (API_KEY_STRING == null)
+    throw Error("Missing ApiKey!");
+const API_KEY = UUID_1.default.fromString(API_KEY_STRING.toString());
 const RANDOM_UUID = UUID_1.default.fromString("851f96b9-51be-4eaf-9b2e-8d303111fe07");
 let TestHypixelAPI = class TestHypixelAPI {
+    testApiKey() {
+        throw (API_KEY_STRING);
+    }
+    testApiKey2() {
+        throw (API_KEY.toString());
+    }
     playerRequestByName() {
         return __awaiter(this, void 0, void 0, function* () {
             const playerByName = yield HypixelAPI.getPlayerByName(USERNAME, API_KEY);
@@ -78,6 +87,12 @@ let TestHypixelAPI = class TestHypixelAPI {
         });
     }
 };
+__decorate([
+    mocha_typescript_1.test("API_KEY", mocha_typescript_1.timeout(5000))
+], TestHypixelAPI.prototype, "testApiKey", null);
+__decorate([
+    mocha_typescript_1.test("API_KEY_2", mocha_typescript_1.timeout(5000))
+], TestHypixelAPI.prototype, "testApiKey2", null);
 __decorate([
     mocha_typescript_1.test("PlayerRequest by Name", mocha_typescript_1.timeout(5000))
 ], TestHypixelAPI.prototype, "playerRequestByName", null);
