@@ -104,5 +104,5 @@ const key = await HypixelAPI.getKey(API_KEY);
 * [Guild](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/GuildResponse.ts)
 * [FindGuild](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/FindGuildResponse.ts)
 * [Boosters](https://github.com/unaussprechlich/Hypixel-API-typescript/blob/master/src/response/BoostersResponse.ts)
-* [Key](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/KeyReponse.ts)
+* [Key](https://github.com/unaussprechlich/Hypixel-API-typescript/blob/master/src/response/KeyResponse.ts)
 * [Leaderboards](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/LeaderboardsResponse.ts)
