@@ -100,9 +100,9 @@ const key = await HypixelAPI.getKey(API_KEY);
 
 ## API Response
 
-* [Player](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/PlayerResponse.ts)
-* [Guild](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/GuildResponse.ts)
-* [FindGuild](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/FindGuildResponse.ts)
-* [Boosters](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/BoostersResponse.ts)
-* [Key](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/KeyReponse.ts)
-* [Leaderboards](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/sry/response/LeaderboardsResponse.ts)
+* [Player](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/PlayerResponse.ts)
+* [Guild](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/GuildResponse.ts)
+* [FindGuild](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/FindGuildResponse.ts)
+* [Boosters](https://github.com/unaussprechlich/Hypixel-API-typescript/blob/master/src/response/BoostersResponse.ts)
+* [Key](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/KeyReponse.ts)
+* [Leaderboards](https://github.com/unaussprechlich/Hypixel-API-typescript/tree/master/src/response/LeaderboardsResponse.ts)
