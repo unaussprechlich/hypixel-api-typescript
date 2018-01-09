@@ -1,7 +1,7 @@
 <p align="center" style="text-align: center;"><img src="https://api.hypixel.net/assets/images/logo.png" width="300" alt="Hypixel logo"/></p>
 
 
-[GitHub](https://github.com/unaussprechlich/hypixel-api) | [NPM](https://www.npmjs.com/package/hypixel-api-typescript)
+[GitHub](https://github.com/unaussprechlich/hypixel-api) | [NPM](https://www.npmjs.com/package/hypixel-api-typescript) [![Build Status](https://travis-ci.org/unaussprechlich/Hypixel-API-typescript.svg?branch=master)](https://travis-ci.org/unaussprechlich/Hypixel-API-typescript)
 
 ### This package is a wrapper for [https://api.hypixel.net](https://api.hypixel.net) written in Typescript. 
 
