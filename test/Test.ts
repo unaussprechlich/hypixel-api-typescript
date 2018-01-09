@@ -16,12 +16,19 @@ const API_KEY_STRING = process.env.API_KEY;
 if(API_KEY_STRING == null) throw Error("Missing ApiKey!");
 const API_KEY = UUID.fromString(API_KEY_STRING.toString());
 
-console.log(API_KEY_STRING);
-console.log(API_KEY.toString());
-
 const RANDOM_UUID = UUID.fromString("851f96b9-51be-4eaf-9b2e-8d303111fe07");
 
 @suite class TestHypixelAPI{
+
+    @test("API_KEY", timeout(5000))
+    public testApiKey(){
+        throw (API_KEY_STRING);
+    }
+
+    @test("API_KEY_2", timeout(5000))
+    public testApiKey2(){
+        throw (API_KEY.toString());
+    }
 
     @test("PlayerRequest by Name", timeout(5000))
     public async playerRequestByName(){
