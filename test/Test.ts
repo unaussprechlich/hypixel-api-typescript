@@ -14,10 +14,9 @@ const GUILD_TAG = "SHADOW";
 const API_KEY_STRING = process.env.API_KEY;
 
 if(API_KEY_STRING == null) throw Error("Missing ApiKey!");
-const API_KEY = UUID.fromString(API_KEY_STRING);
+const API_KEY = UUID.fromString(API_KEY_STRING.toString());
 
 const RANDOM_UUID = UUID.fromString("851f96b9-51be-4eaf-9b2e-8d303111fe07");
-
 
 @suite class TestHypixelAPI{
 
