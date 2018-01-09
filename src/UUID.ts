@@ -12,7 +12,7 @@ export default class UUID{
     }
 
     public static fromString(value : string){
-        if(!uuidPattern.test(value)) throw Exceptions.CANT_PARSE_TO_UUID; //TODO
+        if(!uuidPattern.test(value)) throw Exceptions.CANT_PARSE_TO_UUID;
         return new UUID(value)
     }
 
