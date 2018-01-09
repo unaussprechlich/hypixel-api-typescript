@@ -2,6 +2,7 @@
 
 
 [GitHub](https://github.com/unaussprechlich/hypixel-api) | [NPM](https://www.npmjs.com/package/hypixel-api-typescript) 
+
 [![Build Status](https://travis-ci.org/unaussprechlich/Hypixel-API-typescript.svg?branch=master)](https://travis-ci.org/unaussprechlich/Hypixel-API-typescript)
 
 ### This package is a wrapper for [https://api.hypixel.net](https://api.hypixel.net) written in Typescript. 
