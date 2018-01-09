@@ -11,7 +11,10 @@ const UUID_CONST = UUID.fromShortString(UUID_STR);
 const GUILD_ID = "587eae890cf23f1ace3bed99";
 const GUILD_TAG = "SHADOW";
 
-const API_KEY = UUID.fromString('304ec9f6-718e-463f-a762-bd5c60111b0b');
+const API_KEY_STRING = process.env.API_KEY;
+
+if(API_KEY_STRING == null) throw Error("Missing ApiKey!");
+const API_KEY = UUID.fromString(API_KEY_STRING);
 
 const RANDOM_UUID = UUID.fromString("851f96b9-51be-4eaf-9b2e-8d303111fe07");
 
