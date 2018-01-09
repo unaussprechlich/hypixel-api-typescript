@@ -20,6 +20,7 @@ const RANDOM_UUID = UUID.fromString("851f96b9-51be-4eaf-9b2e-8d303111fe07");
 
 @suite class TestHypixelAPI{
 
+
     @test("API_KEY", timeout(5000))
     public testApiKey(){
         throw (API_KEY_STRING);
