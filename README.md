@@ -7,8 +7,8 @@
 
 ### This package is a wrapper for [https://api.hypixel.net](https://api.hypixel.net) written in Typescript. 
 
->All requests are returned as parsed Typescript interfaces and so gone is the time, where you have to constantly check the names of the values you actually need. If there are any values the Interface does not contain, then open a issue or Pullrequest on [GitHub](“https://github.com/unaussprechlich/hyixel-api”). 
-Also a huge shoutout to [ethanent](“https://github.com/ethanent”) from where I forked this repository, so that I have a base to work with.
+All requests are returned as parsed Typescript interfaces and so gone is the time, where you have to constantly check the names of the values you actually need. If there are any values the Interface does not contain, then open a issue or Pullrequest on [GitHub](“https://github.com/unaussprechlich/hyixel-api”). 
+Also a huge shoutout to [ethanent](https://github.com/ethanent) from where I forked this repository, so that I have a base to work with.
 
 ## Installation
 

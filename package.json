@@ -1,6 +1,6 @@
 {
   "name": "hypixel-api-typescript",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This package is a wrapper for https://api.hypixel.net written in Typescript. ",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/unaussprechlich/hypixel-api-typescript.git"
+    "url": "git+https://github.com/unaussprechlich/Hypixel-API-typescript.git"
   },
   "keywords": [
     "hypixel",
@@ -22,9 +22,9 @@
   "author": "unaussprechlich",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/unaussprechlich/hypixel-api-typescript/issues"
+    "url": "https://github.com/unaussprechlich/Hypixel-API-typescript/issues"
   },
-  "homepage": "https://github.com/unaussprechlich/hypixel-api-typescript#readme",
+  "homepage": "https://github.com/unaussprechlich/Hypixel-API-typescript/readme",
   "dependencies": {
     "minecraft-api": "0.0.1"
   },
