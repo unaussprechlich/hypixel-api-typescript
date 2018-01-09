@@ -1,6 +1,6 @@
 {
   "name": "hypixel-api-typescript",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "This package is a wrapper for https://api.hypixel.net written in Typescript. ",
   "main": "index.js",
   "scripts": {
