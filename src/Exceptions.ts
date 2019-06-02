@@ -1,4 +1,4 @@
-export class BaseException{constructor(){Error.apply(this, arguments)}}
+export class BaseException{constructor(){Error.apply(this, arguments[1])}}
 export class Exc extends BaseException{constructor(public code: number, public message: string){super()}}
 export class IntExc extends BaseException{constructor(public code: number, public message: string){super()}}
 
