@@ -1,15 +1,15 @@
-import * as HypixelAPI from "../index"
+import * as HypixelAPI from "../index";
 
 import { expect } from 'chai';
-import { suite, test, slow, timeout } from "mocha-typescript";
+import { suite, test, timeout } from "mocha-typescript";
 import UUID from "../src/UUID";
-import {Player} from "../src/response/PlayerResponse";
+
 
 const USERNAME = 'unaussprechlich';
 const UUID_STR = '4064d7ecc2124a1cb252ecc0403a2824';
 const UUID_CONST = UUID.fromShortString(UUID_STR);
-const GUILD_ID = "587eae890cf23f1ace3bed99";
-const GUILD_TAG = "SHADOW";
+const GUILD_ID = "5b4aadaf0cf21fddabf8bd64";
+const GUILD_TAG = "GABAGE";
 
 const API_KEY_STRING = process.env.API_KEY;
 
@@ -64,7 +64,7 @@ const RANDOM_UUID = UUID.fromString("851f96b9-51be-4eaf-9b2e-8d303111fe07");
 
     @test("Request with invalid API-Key")
     public geyKeyInvalid(done){
-        HypixelAPI.getKey(RANDOM_UUID).then(value => done(value)).catch(err => done());
+        HypixelAPI.getKey(RANDOM_UUID).then(value => done(value)).catch(() => done());
     }
 
     @test("Request valid API-Key")

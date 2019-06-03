@@ -21,8 +21,8 @@ const UUID_1 = require("../src/UUID");
 const USERNAME = 'unaussprechlich';
 const UUID_STR = '4064d7ecc2124a1cb252ecc0403a2824';
 const UUID_CONST = UUID_1.default.fromShortString(UUID_STR);
-const GUILD_ID = "587eae890cf23f1ace3bed99";
-const GUILD_TAG = "SHADOW";
+const GUILD_ID = "5b4aadaf0cf21fddabf8bd64";
+const GUILD_TAG = "GABAGE";
 const API_KEY_STRING = process.env.API_KEY;
 if (API_KEY_STRING == null)
     throw Error("Missing ApiKey!");
@@ -72,7 +72,7 @@ let TestHypixelAPI = class TestHypixelAPI {
         });
     }
     geyKeyInvalid(done) {
-        HypixelAPI.getKey(RANDOM_UUID).then(value => done(value)).catch(err => done());
+        HypixelAPI.getKey(RANDOM_UUID).then(value => done(value)).catch(() => done());
     }
     getKeyValid() {
         return __awaiter(this, void 0, void 0, function* () {

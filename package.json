@@ -1,6 +1,6 @@
 {
   "name": "hypixel-api-typescript",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "This package is a wrapper for https://api.hypixel.net written in Typescript. ",
   "main": "index.js",
   "scripts": {
@@ -26,13 +26,15 @@
   },
   "homepage": "https://github.com/unaussprechlich/Hypixel-API-typescript/readme",
   "dependencies": {
-    "minecraft-api": "0.0.1"
+    "minecraft-api": "^0.0.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.10",
-    "@types/node": "^9.3.0",
-    "chai": "^4.1.2",
+    "@types/chai": "^4.1.7",
+    "@types/node": "^9.6.49",
+    "chai": "^4.2.0",
     "mocha": "^3.5.3",
-    "mocha-typescript": "^1.1.12"
+    "mocha-typescript": "^1.1.17",
+    "ts-node": "^8.2.0",
+    "typescript": "^3.5.1"
   }
 }
