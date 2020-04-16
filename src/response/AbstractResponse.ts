@@ -1,5 +1,5 @@
 export default interface AbstractResponse{
-    success : number,
+    success : boolean,
     cause? : string,
     throttle?: boolean,
 }

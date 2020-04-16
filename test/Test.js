@@ -6,10 +6,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -21,8 +22,8 @@ const UUID_1 = require("../src/UUID");
 const USERNAME = 'unaussprechlich';
 const UUID_STR = '4064d7ecc2124a1cb252ecc0403a2824';
 const UUID_CONST = UUID_1.default.fromShortString(UUID_STR);
-const GUILD_ID = "5b4aadaf0cf21fddabf8bd64";
-const GUILD_TAG = "GABAGE";
+const GUILD_ID = "5b8c72d20cf24573ab84c83d";
+const GUILD_TAG = "TRASH";
 const API_KEY_STRING = process.env.API_KEY;
 if (API_KEY_STRING == null)
     throw Error("Missing ApiKey!");
@@ -71,43 +72,51 @@ let TestHypixelAPI = class TestHypixelAPI {
             chai_1.expect(guildByUuid.tag).to.equal(GUILD_TAG);
         });
     }
-    geyKeyInvalid(done) {
-        HypixelAPI.getKey(RANDOM_UUID).then(value => done(value)).catch(() => done());
+    geyKeyInvalid() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield HypixelAPI.getKey(RANDOM_UUID);
+            }
+            catch (e) {
+                chai_1.expect(e.message).to.equal("Invalid API key!");
+            }
+        });
     }
     getKeyValid() {
         return __awaiter(this, void 0, void 0, function* () {
-            const respond = yield HypixelAPI.getKey(API_KEY);
-            chai_1.expect(respond.ownerUuid).to.equal(UUID_STR);
+            const response = yield HypixelAPI.getKey(API_KEY);
+            chai_1.expect(response.ownerUuid).to.equal(UUID_STR);
         });
     }
 };
 __decorate([
-    mocha_typescript_1.test("PlayerRequest by Name", mocha_typescript_1.timeout(5000))
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "playerRequestByName", null);
 __decorate([
-    mocha_typescript_1.test("PlayerRequest by UUID", mocha_typescript_1.timeout(5000))
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "playerRequestByUuid", null);
 __decorate([
-    mocha_typescript_1.test("FindGuildRequest by Name", mocha_typescript_1.timeout(5000))
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "findGuildByName", null);
 __decorate([
-    mocha_typescript_1.test("FindGuildRequest by UUID", mocha_typescript_1.timeout(5000))
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "findGuildByUuid", null);
 __decorate([
-    mocha_typescript_1.test("GuildRequest by ID", mocha_typescript_1.timeout(5000))
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "guildRequestById", null);
 __decorate([
-    mocha_typescript_1.test("GuildRequest by NAME", mocha_typescript_1.timeout(5000))
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "guildRequestByName", null);
 __decorate([
-    mocha_typescript_1.test("GuildRequest by UUID", mocha_typescript_1.timeout(5000))
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "guildRequestByUuid", null);
 __decorate([
-    mocha_typescript_1.test("Request with invalid API-Key")
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "geyKeyInvalid", null);
 __decorate([
-    mocha_typescript_1.test("Request valid API-Key")
+    mocha_typescript_1.test
 ], TestHypixelAPI.prototype, "getKeyValid", null);
 TestHypixelAPI = __decorate([
-    mocha_typescript_1.suite
+    mocha_typescript_1.suite(mocha_typescript_1.timeout(5000))
 ], TestHypixelAPI);
+//# sourceMappingURL=Test.js.map

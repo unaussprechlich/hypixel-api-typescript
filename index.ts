@@ -1,5 +1,4 @@
 export *  from "./src/HypixelAPI";
-export *  from "./src/Exceptions"
 export *  from "./src/UUID"
 
 export *  from "./src/response/AbstractResponse"

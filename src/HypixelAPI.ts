@@ -1,4 +1,4 @@
-import request = require("request");
+import Axios from "axios"
 
 import * as MinecraftAPI from "minecraft-api";
 
@@ -17,6 +17,10 @@ import {KeyInfo, KeyRespond} from "./response/KeyResponse";
 
 const baseURL = 'https://api.hypixel.net/';
 
+const HypixelAxios = Axios.create({
+    baseURL : baseURL
+})
+
 //PLAYER ###############################################################################################################
 
 /**
@@ -30,7 +34,7 @@ const baseURL = 'https://api.hypixel.net/';
  */
 export async function getPlayerByUuid(uuid : UUID, apiKey : UUID) : Promise<Player>{
     const response = await _simpleGet<PlayerResponse>(baseURL + 'player?uuid=' + uuid.toString() + '&key=' + apiKey.toString());
-    if(response.player == null) throw Exceptions.NULL_POINTER;
+    if(response.player == null) throw Exceptions.NOT_FOUND;
     return response.player;
 }
 
@@ -45,6 +49,7 @@ export async function getPlayerByUuid(uuid : UUID, apiKey : UUID) : Promise<Play
  */
 export async function getPlayerByName(name : string, apiKey : UUID) : Promise<Player>{
     const uuid = await MinecraftAPI.uuidForName(name);
+    if(!uuid) throw Exceptions.NO_UUID_FOR_NAME;
     return getPlayerByUuid(UUID.fromString(uuid), apiKey)
 }
 
@@ -52,7 +57,7 @@ export async function getPlayerByName(name : string, apiKey : UUID) : Promise<Pl
 
 /**
  * Does return the GuildID as {@link string} for a given NAME
- * @throws {Exceptions.GUILD_NOT_FOUND} when the given user is not in a guild
+ * @throws {Exceptions.NOT_FOUND} when the given user is not in a guild
  * Number of requests: 1
  *
  * @param {string} name
@@ -62,12 +67,13 @@ export async function getPlayerByName(name : string, apiKey : UUID) : Promise<Pl
  */
 export async function findGuildIdByPlayerName(name : string, apiKey : UUID)  : Promise<string>{
     const uuid = await MinecraftAPI.uuidForName(name);
+    if(!uuid) throw Exceptions.NO_UUID_FOR_NAME;
     return findGuildIdByPlayerUuid(UUID.fromShortString(uuid), apiKey)
 }
 
 /**
  * Does return the GuildID as {@link string} for a given UUID
- * @throws {Exceptions.GUILD_NOT_FOUND} when the given user is not in a guild
+ * @throws {Exceptions.NOT_FOUND} when the given user is not in a guild
  * Number of requests: 1
  *
  * @param {UUID} uuid
@@ -77,7 +83,7 @@ export async function findGuildIdByPlayerName(name : string, apiKey : UUID)  : P
  */
 export async function findGuildIdByPlayerUuid(uuid : UUID, apiKey : UUID) : Promise<string>{
     const response = await _simpleGet<FindGuildResponse>(baseURL + 'findGuild?byUuid=' + uuid.toString() + '&key=' + apiKey.toString());
-    if(response.guild == null) throw Exceptions.GUILD_NOT_FOUND;
+    if(response.guild == null) throw Exceptions.NOT_FOUND;
     return response.guild;
 }
 
@@ -86,6 +92,7 @@ export async function findGuildIdByPlayerUuid(uuid : UUID, apiKey : UUID) : Prom
 /**
  * Does return a parsed {@link Guild} for a given GuildID
  * Number of requests: 1
+ * @throws {Exceptions.NOT_FOUND} when no guild for the ID is found
  *
  * @param {string} id
  * @param {UUID} apiKey
@@ -94,7 +101,7 @@ export async function findGuildIdByPlayerUuid(uuid : UUID, apiKey : UUID) : Prom
  */
 export async function getGuildById(id : string, apiKey : UUID) : Promise<Guild>{
     const response = await _simpleGet<GuildResponse>(baseURL + 'guild?id=' + id + '&key=' + apiKey.toString());
-    if(response.guild == null) throw Exceptions.NULL_POINTER;
+    if(response.guild == null) throw Exceptions.NOT_FOUND;
     return response.guild;
 }
 
@@ -138,7 +145,7 @@ export async function getGuildByPlayerUuid(uuid : UUID, apiKey : UUID) : Promise
  */
 export async function getBoosters(apiKey : UUID) : Promise<Booster[]>{
     const response = await _simpleGet<BoostersResponse>(baseURL + 'boosters?key=' + apiKey.toString());
-    if(response.boosters == null) throw Exceptions.NULL_POINTER;
+    if(response.boosters == null) throw Exceptions.NOT_FOUND;
     return response.boosters;
 }
 
@@ -152,7 +159,7 @@ export async function getBoosters(apiKey : UUID) : Promise<Booster[]>{
  */
 export async function getBoostersIsDecrementing(apiKey : UUID) : Promise<boolean>{
     const response = await _simpleGet<BoostersResponse>(baseURL + 'boosters?key=' + apiKey.toString());
-    if(response.boosterState == null) throw Exceptions.NO_BOOSTERSTATE;
+    if(response.boosterState == null) throw Exceptions.NOT_FOUND;
     return response.boosterState.decrementing;
 }
 
@@ -168,7 +175,7 @@ export async function getBoostersIsDecrementing(apiKey : UUID) : Promise<boolean
  */
 export async function getLeaderboards(apiKey : UUID) : Promise<Leaderboards>{
     const response = await _simpleGet<LeaderboardsResponse>(baseURL + 'leaderboards?key=' + apiKey.toString());
-    if(response.leaderboards == null) throw Exceptions.NULL_POINTER;
+    if(response.leaderboards == null) throw Exceptions.NOT_FOUND;
     return response.leaderboards;
 }
 
@@ -182,7 +189,7 @@ export async function getLeaderboards(apiKey : UUID) : Promise<Leaderboards>{
  */
 export async function getKey(apiKey : UUID) : Promise<KeyInfo>{
     const response = await _simpleGet<KeyRespond>(baseURL + 'key?key=' + apiKey.toString());
-    if(response.record == null) throw Exceptions.NULL_POINTER;
+    if(response.record == null) throw Exceptions.NOT_FOUND;
     return response.record;
 }
 
@@ -197,19 +204,10 @@ export async function getKey(apiKey : UUID) : Promise<KeyInfo>{
  * @private
  */
 async function _simpleGet<T extends AbstractResponse>(url: string): Promise<T> {
-    return new Promise<T>((resolve, reject) => {
-        request(url, {json: true}, function (err, res, body) {
-            try{
-                if (err) throw err;
-                if (typeof body === 'undefined') throw Exceptions.BODY_UNDEFINED;
-                if (body.error) throw (body.error + ": " + body.errorMessage);
-                if(body.throttle) throw Exceptions.API_KEY_THROTTLE;
-                if(body.cause != null && body.cause == "Invalid API key!") throw Exceptions.API_KEY_INVALID;
-                if(!body.success) throw (body.cause || body) ;
-                resolve(body);
-            }catch(err){
-                reject(err)
-            }
-        });
-    })
+    const response = await HypixelAxios.get(url);
+    if(!response.data) throw Exceptions.NOT_FOUND;
+    if(response.data.cause === "Invalid API key") throw Exceptions.API_KEY_INVALID;
+    if(response.data.throttle) throw Exceptions.API_KEY_THROTTLE;
+    if(!response.data.success) throw (response.data.cause | response.status )
+    return response.data;
 }

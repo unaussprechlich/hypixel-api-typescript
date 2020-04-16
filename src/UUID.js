@@ -37,3 +37,4 @@ class UUID {
     }
 }
 exports.default = UUID;
+//# sourceMappingURL=UUID.js.map
